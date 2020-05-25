@@ -1,8 +1,10 @@
 import koa from 'koa'
 import config from './config'
 import myCommander from './config/myCommander'
+import koaBody from 'koa-body'
+import router from './router'
 
-export const app = new koa()
+const app = new koa()
 
 /**
  * config
@@ -13,12 +15,20 @@ const { port } = myCommander()
 // static directory
 app.use(config.staticDirectory())
 
+// koa body
+app.use(koaBody())
 
 /**
  * middleware
  */
 // CORS
 app.use(config.cors)
+
+/**
+ * router
+ */
+app.use(router.routes())
+app.use(router.allowedMethods())
 
 
 /**
