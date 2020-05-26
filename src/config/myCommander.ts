@@ -1,11 +1,11 @@
-import { program } from 'commander'
+import yargs from 'yargs'
+
+const argv = yargs.argv
 
 export default () => {
-  program
-    .version('1.0.0')
-    .option('-p, --port <number>', 'use port', '8080')
-    .parse(process.argv)
+  const port = argv.port || argv.p
+
   return {
-    port: program.port,
+    port,
   }
 }
