@@ -7,6 +7,8 @@ const router = new koaRouter()
 const prefix3 = 'https://joversite.gitee.io/web-front'
 
 router.get(new RegExp('(.*)'), async (ctx) => {
+  const headers = ctx.request.headers
+  console.log(`${headers.referer} - ${headers['user-agent']}`)
   ctx.redirect(prefix3 + ctx.params[0])
 })
 
