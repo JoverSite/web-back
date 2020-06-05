@@ -13,7 +13,7 @@ const app = new koa()
 const { port } = myCommander()
 
 // static directory
-app.use(config.staticDirectory())
+// app.use(config.staticDirectory())
 
 // koa body
 app.use(koaBody())

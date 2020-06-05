@@ -1,15 +1,12 @@
+import fs from 'fs'
+import path from 'path'
 import koaRouter from 'koa-router'
 
 const router = new koaRouter()
+let index = fs.readFileSync(path.resolve(__dirname, '../public/static/index.html'), 'binary')
 
-// const prefix = 'https://raw.githubusercontent.com/JoverSite/web-front/package/dist'
-// const prefix2 = 'https://cdn.jsdelivr.net/gh/JoverSite/web-front@package/dist/'
-const prefix3 = 'https://joversite.gitee.io/web-front'
-
-router.get(new RegExp('(.*)'), async (ctx) => {
-  const headers = ctx.request.headers
-  console.log(`${headers.referer} - ${headers['user-agent']}`)
-  ctx.redirect(prefix3 + ctx.params[0])
+router.get(new RegExp('.*'), async (ctx) => {
+  ctx.body = index
 })
 
 export default router
